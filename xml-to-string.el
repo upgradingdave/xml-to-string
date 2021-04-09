@@ -67,7 +67,7 @@
 (defun xml-to-string-parse-child-node (child-node)
   "Convert `node | string' to string representation"
   (if (stringp child-node)
-      child-node
+      (xml-escape-string child-node)
     (xml-to-string-parse-node child-node)))
 
 (defun xml-to-string-parse-qname (node)
@@ -79,7 +79,7 @@
   string like \"qname=value qname=value\" ..."
   (mapconcat (lambda (elem) (concat (symbol-name (car elem))
                                "="
-                               "\"" (cdr elem) "\"")) attr-list " "))
+                               "\"" (xml-escape-string (cdr elem)) "\"")) attr-list " "))
 
 
 (provide 'xml-to-string)
